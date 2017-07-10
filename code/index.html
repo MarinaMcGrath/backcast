@@ -16,7 +16,7 @@
       <br/><br/>this message will disappear when <em>app</em> view is correctly rendered<br/><br/><br/>
     </h5>
   </div>
-
+  <script src="src/data/exampleVideoData.js"></script>
   <script src="src/models/video.js"></script>
   <script src="src/collections/videos.js"></script>
   <script src="src/lib/templateUrl.js"></script>
@@ -28,8 +28,9 @@
   <script src="src/views/videoPlayer.js"></script>
 
   <script>
+    // var videos = new Videos(exampleVideoData);
     backboneReady(() => {
-      new AppView();
+      new AppView(exampleVideoData);
     });
   </script>
 
