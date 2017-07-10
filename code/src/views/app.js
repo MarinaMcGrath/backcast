@@ -11,7 +11,7 @@ var AppView = Backbone.View.extend({
     this.$el.html(this.template());
     new VideoPlayerView();
     new SearchView();
-    new VideoListView({ collection: this.videos});
+    new VideoListView({ collection: this.videos}).render();
     return this;
   },
 

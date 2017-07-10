@@ -10,7 +10,7 @@ var VideoListView = Backbone.View.extend({
 
     if (this.videos.collection.models && this.videos.collection.models.length > 0) {
       this.videos.collection.models.forEach(element => {
-        new VideoListEntryView(element);
+        new VideoListEntryView({ model: element});
       });
     }
 
