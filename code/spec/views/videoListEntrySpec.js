@@ -6,8 +6,9 @@ describe('VideoListEntryView', function() {
     sinon.spy(model, 'select');
 
     view = new VideoListEntryView({ model: model });
-    view.template = _.template('<div class="video-list-entry-title"><%= snippet.title %></div>');
-    view.render();  // re-render with test template
+    // view.template = _.template('<div class="video-list-entry-title">'); // <%= snippet.title %></div>'); //! this shit broke
+    view.template = _.template('<div class="video-list-entry-title"><%= snippet.title %></div>');  //? this shit not-so broke
+    view.render(); // re-render with test template
   });
 
   it('should render a video\'s content', function() {
@@ -15,6 +16,7 @@ describe('VideoListEntryView', function() {
   });
 
   it('should call select on the model when the title is clicked', function() {
+    console.log(view, view.$('.video-list-entry-title'), view.$el === view.$('.video-list-entry-title'));
     view.$('.video-list-entry-title').click();
     expect(model.select).to.have.been.called;
   });
