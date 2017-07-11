@@ -31,23 +31,31 @@
 
   <script>
     backboneReady(() => {
-      const app = new AppView(exampleVideoData);
-      $('.search').on('keyup', function(e) {
-        if (e.key === 'Enter') {
-          new Videos().search($(this).val());
-          updateResults(window.fetched);
-        }       
-      })
-      $('.btn-query').click(function() {
-        new Videos().search($('.search').val());
-        updateResults(window.fetched);
-      })
+      new Videos().search('javascript|backbonejs', function() {
+        const data = window.fetched;
+        const app = new AppView(data);
+        eventListeners();
+        function updateResults(query) {
+          query = query.split(" ").join("");
+          app.videos.search(query, function() {
+            app.videos = new Videos(window.fetched);
+            app.render();
+            eventListeners();
+          });  
+        }
+        function eventListeners() {
+          $('.search').on('keyup', function(e) {
+            if (e.key === 'Enter' && $(this).val() !== '') {
+              updateResults($(this).val());
+            }       
+          })
+          $('.btn-query').click(function() {
+            updateResults($('.search').val());
+          })
+        }  
+      });
 
-    function updateResults(fetched) {
-      
-    }
-
-      
+    
 
     });
   </script>
