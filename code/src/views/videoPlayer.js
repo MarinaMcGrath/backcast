@@ -2,7 +2,7 @@ var VideoPlayerView = Backbone.View.extend({
   initialize: function(video) {
     this.video = video;
     if (video === undefined) {
-      this.video = { attributes: null }
+      this.video = { attributes: null };
     }
     this.render();
   },
