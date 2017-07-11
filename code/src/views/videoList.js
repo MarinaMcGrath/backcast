@@ -8,12 +8,13 @@ var VideoListView = Backbone.View.extend({
     this.$el.children().detach();
     this.$el.html(this.template());
 
+    $('.list').html(this.$el);
+    $('.video-list').empty();
     if (this.videos.collection.models && this.videos.collection.models.length > 0) {
       this.videos.collection.models.forEach(element => {
-        new VideoListEntryView({ model: element});
+        new VideoListEntryView({ model: element });
       });
     }
-
     return this;
   },
   template: templateURL('src/templates/videoList.html')
