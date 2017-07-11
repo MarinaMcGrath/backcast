@@ -31,7 +31,32 @@
 
   <script>
     backboneReady(() => {
-      new AppView(exampleVideoData);
+      new Videos().search('javascript|backbonejs', function() {
+        const data = window.fetched;
+        const app = new AppView(data);
+        eventListeners();
+        function updateResults(query) {
+          query = query.split(" ").join("");
+          app.videos.search(query, function() {
+            app.videos = new Videos(window.fetched);
+            app.render();
+            eventListeners();
+          });  
+        }
+        function eventListeners() {
+          $('.search').on('keyup', function(e) {
+            if (e.key === 'Enter' && $(this).val() !== '') {
+              updateResults($(this).val());
+            }       
+          })
+          $('.btn-query').click(function() {
+            updateResults($('.search').val());
+          })
+        }  
+      });
+
+    
+
     });
   </script>
 
